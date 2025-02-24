@@ -1,0 +1,15 @@
+- Schedule Creation Issues
+    - Check if the vesting contract can work with ETH. If yes, check for any potential revert of the reentrancy issue.
+    - Check if the owner/admin cannot create new schedules due to denial of service.
+        - The creation of schedules can be front-run by others. 
+    - Check if the beneficiary’s vesting schedule can be overwritten unintendedly.
+- Claim/Release Issues
+    - Check if the user receives more tokens than they should receive.
+        - Potential reentrancy issue.
+    - Check if the user cannot claim the scheduled vesting tokens due to denial of service.
+        - Insufficient token balance in the contract.
+        - Overflow/underflow issue during the caculation.
+    - Check if the user can bypass vesting schedules and access locked tokens prematurely.
+- Revoke Issues
+    - Check if the revoking process transfers all remaining tokens in the contract back to the owner upon revocation and if it does not account for tokens that have already been vested to beneficiaries. Only unvested tokens should be returned to the owner.
+    - Check if the revoking process does not recover all the states that have been set during the creation of the schedule.
